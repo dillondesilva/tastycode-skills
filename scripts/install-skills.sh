@@ -1,20 +1,19 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-if [[ -z "${BASH_SOURCE[0]:-}" || "${BASH_SOURCE[0]}" == "bash" ]]; then
-  cat >&2 <<'EOF'
-This installer needs repository files under ./skills and cannot run from stdin.
-
-Use one of these:
-  bash scripts/install-skills.sh --project .
-  curl ... | bash -s -- --list    # only when script fetches skills itself
-EOF
-  exit 1
-fi
-
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
 SOURCE_DIR="${ROOT_DIR}/skills"
+REPO_URL="${TC_SKILLS_REPO_URL:-https://github.com/dillondesilva/tastycode-skills.git}"
+
+TMP_CLONE=""
+
+cleanup() {
+  if [[ -n "${TMP_CLONE}" && -d "${TMP_CLONE}" ]]; then
+    rm -rf "${TMP_CLONE}"
+  fi
+}
+trap cleanup EXIT
 
 usage() {
   cat <<'EOF'
@@ -35,6 +34,24 @@ list_skills() {
     [[ -d "${dir}" ]] || continue
     basename "${dir}"
   done
+}
+
+ensure_source_dir() {
+  if [[ -d "${SOURCE_DIR}" ]]; then
+    return
+  fi
+
+  TMP_CLONE="$(mktemp -d)"
+  if ! git clone --depth 1 "${REPO_URL}" "${TMP_CLONE}"; then
+    echo "Failed to clone skills repo: ${REPO_URL}" >&2
+    exit 1
+  fi
+  SOURCE_DIR="${TMP_CLONE}/skills"
+
+  if [[ ! -d "${SOURCE_DIR}" ]]; then
+    echo "Could not find skills directory after clone: ${SOURCE_DIR}" >&2
+    exit 1
+  fi
 }
 
 copy_skill() {
@@ -59,6 +76,8 @@ main() {
     usage
     exit 1
   fi
+
+  ensure_source_dir
 
   local mode=""
   local target=""
