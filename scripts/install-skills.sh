@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-ROOT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
-SOURCE_DIR="${ROOT_DIR}/skills"
+SOURCE_DIR=""
+if [[ -n "${BASH_SOURCE[0]:-}" && -f "${BASH_SOURCE[0]}" ]]; then
+  SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+  ROOT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
+  SOURCE_DIR="${ROOT_DIR}/skills"
+fi
 REPO_URL="${TC_SKILLS_REPO_URL:-https://github.com/dillondesilva/tastycode-skills.git}"
 
 TMP_CLONE=""

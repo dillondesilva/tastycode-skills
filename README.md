@@ -2,10 +2,6 @@
 
 Reusable AI skill pack with a simple installer.
 
-The installer supports both local repo usage and `curl | bash` usage.
-When run outside the repo, it clones this repository to a temporary directory,
-installs selected skills, and then removes the temporary clone.
-
 ## Structure
 
 - `skills/` - Source skills in `<skill-name>/SKILL.md` format
@@ -13,7 +9,7 @@ installs selected skills, and then removes the temporary clone.
 
 ## Quick start
 
-Install all skills into current project (local clone):
+Install all skills into current project (from this repo checkout):
 
 ```bash
 bash scripts/install-skills.sh --project .
@@ -25,7 +21,7 @@ Install all skills into current project (`curl`):
 curl -fsSL https://raw.githubusercontent.com/dillondesilva/tastycode-skills/main/scripts/install-skills.sh | bash -s -- --project .
 ```
 
-Install specific skills globally (local clone):
+Install specific skills globally (from this repo checkout):
 
 ```bash
 bash scripts/install-skills.sh --global concept-chain debug-the-explanation
@@ -37,7 +33,7 @@ Install specific skills globally (`curl`):
 curl -fsSL https://raw.githubusercontent.com/dillondesilva/tastycode-skills/main/scripts/install-skills.sh | bash -s -- --global concept-chain debug-the-explanation
 ```
 
-List available skills (local clone):
+List available skills (from this repo checkout):
 
 ```bash
 bash scripts/install-skills.sh --list
@@ -53,6 +49,7 @@ curl -fsSL https://raw.githubusercontent.com/dillondesilva/tastycode-skills/main
 
 - Uses local `skills/` when running from this repo.
 - Falls back to cloning `tastycode-skills` into a temporary directory when needed.
+- `curl` mode requires `bash` and `git` on your machine.
 - Installs into:
   - `--project <path>` -> `<path>/.cursor/skills`
   - `--global` -> `~/.cursor/skills`
