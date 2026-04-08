@@ -1,6 +1,17 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+if [[ -z "${BASH_SOURCE[0]:-}" || "${BASH_SOURCE[0]}" == "bash" ]]; then
+  cat >&2 <<'EOF'
+This installer needs repository files under ./skills and cannot run from stdin.
+
+Use one of these:
+  bash scripts/install-skills.sh --project .
+  curl ... | bash -s -- --list    # only when script fetches skills itself
+EOF
+  exit 1
+fi
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
 SOURCE_DIR="${ROOT_DIR}/skills"
