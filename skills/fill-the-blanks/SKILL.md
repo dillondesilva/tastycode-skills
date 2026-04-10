@@ -3,12 +3,15 @@ name: fill-the-blanks
 description: >
   Generates a fill-in-the-blanks pseudocode exercise to help the user learn
   how a component or workflow works by completing it themselves, rather than
-  just reading an explanation. Use this skill when the user asks a learning-oriented
-  question about how something works in code — triggered by questions starting
-  with or containing "how does", "how do", "how would", "explain how", "walk me
-  through", or "why does X work". Do NOT use for purely practical requests like
-  "write me a function" or "fix this bug". Only trigger when there is a clear
-  learning intent behind a code or systems question.
+  just reading an explanation. Best for: procedural and code-level understanding
+  — training loops, data pipelines, system workflows, algorithms. Choose this
+  over other skills when the user's question is about *how something works in
+  code* or as a process with sequential steps. The signal is that a good answer
+  would naturally be pseudocode or a step-by-step procedure. Prefer other
+  skills when: the question is conceptual rather than procedural (→ feynman),
+  about relationships between concepts (→ concept-chain), covers many parallel
+  terms (→ qa-match), or the user already shows familiarity and wants a
+  critical challenge (→ debug-the-explanation).
 ---
 
 # Fill the Blanks
@@ -17,19 +20,18 @@ This skill turns a "how does X work?" question into a pseudocode exercise where
 the user fills in the missing pieces themselves, building genuine understanding
 rather than passively reading an explanation.
 
-## When to use
+## When this skill fits
 
-Trigger on learning-intent questions about code or systems:
+Choose this for learning-intent questions about code or systems:
 - "How does the training loop work?"
 - "How would a VLA model process an observation?"
 - "Walk me through how LeRobot handles data collection"
 - "Why does backprop flow through this layer?"
 
-Do NOT trigger on:
-- "Write me a function that..."
-- "Fix this bug"
-- "What's the syntax for..."
-- `/vibes` messages
+This skill is NOT a fit when:
+- The request is purely practical ("write me a function...", "fix this bug")
+- The question is about syntax lookup, not understanding
+- Another skill would serve the learning goal better (see description)
 
 ---
 

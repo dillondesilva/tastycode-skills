@@ -2,14 +2,19 @@
 name: debug-the-explanation
 description: >
   Generates a deliberately flawed explanation of a concept — with subtle errors
-  baked in — and asks the user to find and correct them. Use this skill when the
-  user asks a learning-oriented question about how something works, triggered by
-  "how does", "why does", "explain", "help me understand", or "walk me through".
-  Also trigger when the user has just demonstrated reasonable familiarity with a
-  topic and would benefit from a challenge beyond a straight explanation. Do NOT
-  use for practical tasks, debugging real code, or /vibes messages. This skill
-  is explicitly about Claude generating wrong content on purpose — this must
-  always be clearly flagged to the user upfront.
+  baked in — and asks the user to find and correct them. Best for: users who
+  already have some familiarity with a topic and would benefit from a critical
+  challenge rather than a straight explanation. Choose this over other skills
+  when the user has demonstrated partial or solid understanding and needs to
+  sharpen it — finding errors in a confident-sounding explanation is harder
+  than explaining from scratch and builds deeper discrimination. Also a good
+  choice when the user has already successfully completed a Feynman exercise
+  or concept-chain and is ready for a harder mode. Prefer other skills when:
+  the user is encountering the concept for the first time (→ feynman), the
+  question is about relationships between concepts (→ concept-chain), or the
+  topic is procedural/code-based (→ fill-the-blanks). This skill generates
+  wrong content on purpose — this must always be clearly flagged to the user
+  upfront.
 ---
 
 # Debug the Explanation

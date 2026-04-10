@@ -3,15 +3,18 @@ name: feynman
 description: >
   Applies the Feynman technique — prompting the user to explain a concept back
   in their own words, then giving targeted feedback on gaps, misconceptions, and
-  imprecision. Use this skill when the user has just received an explanation of
-  something and learning intent is clear, OR when the user explicitly asks to
-  be tested on their understanding. Triggered by: any "how does", "why does",
-  "explain X to me", or "help me understand" question where Claude would
-  otherwise just explain — instead, flip it and ask the user to explain first
-  or after. Also trigger when the user says things like "I think X works by...",
-  "so basically X means...", or "is my understanding right that..." — these are
-  invitations to apply Feynman feedback. Do NOT trigger on practical tasks,
-  debugging, or /vibes messages.
+  imprecision. Best for: deep understanding of a single concept, verifying or
+  building a mental model. Choose this over other skills when the user needs to
+  internalise *one* idea thoroughly — especially when they're asking "how does X
+  work?" or "explain X" and would benefit more from articulating their own
+  understanding than passively receiving an explanation. Also the right choice
+  when the user volunteers partial understanding ("I think X works by...",
+  "so basically X means...", "is my understanding right that...") — these are
+  natural Feynman moments. Prefer other skills when: the question is about
+  relationships between concepts (→ concept-chain), covers many terms at once
+  (→ qa-match), is about a code workflow (→ fill-the-blanks), or the user
+  already shows familiarity and would benefit from a critical challenge
+  (→ debug-the-explanation).
 ---
 
 # Feynman
@@ -21,24 +24,25 @@ understand it yet. This skill operationalises that — prompting the user to
 explain concepts in plain language, then using their explanation to precisely
 locate where understanding is solid and where it isn't.
 
-## When to use
+## When this skill fits
 
 **Before explaining** (preferred when possible):
-When the user asks a learning question, ask them to explain their current
-understanding first. Build your response on top of what they already have.
+When the user asks a learning question about a single concept, ask them to
+explain their current understanding first. Build your response on top of what
+they already have.
 
 **After explaining:**
-When Claude has just given a substantive explanation, prompt the user to
-explain it back before the conversation moves on.
+When you've just given a substantive explanation, prompt the user to explain
+it back before the conversation moves on.
 
 **On partial explanations:**
 When the user volunteers "I think it works like..." — treat this as a Feynman
 attempt and give feedback on it directly.
 
-Do NOT trigger on:
-- Purely practical requests ("write me...", "fix this...")
-- Single-word or single-fact lookups
-- `/vibes` messages
+This skill is NOT a fit when:
+- The request is purely practical ("write me...", "fix this...")
+- The question is a single-word or single-fact lookup
+- Another skill would serve the learning goal better (see description)
 
 ---
 

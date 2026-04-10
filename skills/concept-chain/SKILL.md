@@ -3,13 +3,17 @@ name: concept-chain
 description: >
   Generates an interactive concept-chaining exercise where the user builds or
   completes a chain of linked ideas (X → Y → Z) to demonstrate they understand
-  how concepts relate and flow into each other. Use this skill when the user
-  asks a learning question about how concepts connect, depend on each other, or
-  lead to an outcome — triggered by questions like "why does X lead to Y",
-  "what's the relationship between", "how does X end up causing Z", "what are
-  the steps from X to Z", or "why do we need X before Y". Do NOT use for
-  purely practical or task-oriented requests. Only trigger when there is clear
-  learning intent about conceptual relationships or causal chains.
+  how concepts relate and flow into each other. Best for: understanding
+  dependencies, causal relationships, and how concepts connect. Choose this
+  over other skills when the user's question is fundamentally about *how things
+  relate* — "why does X lead to Y", "what's the relationship between A and B",
+  "how does X end up causing Z", "what are the steps from X to Z". The signal
+  is that the answer requires a chain of reasoning, not just a single concept.
+  Prefer other skills when: the question is about one concept in depth
+  (→ feynman), the user needs to understand a code workflow (→ fill-the-blanks),
+  the topic covers many parallel terms rather than a sequence (→ qa-match), or
+  the user already shows familiarity and wants a critical challenge
+  (→ debug-the-explanation).
 ---
 
 # Concept Chain
@@ -18,18 +22,18 @@ This skill turns a "how does X connect to Z?" question into a chain-building
 exercise. The user has to map out or complete the links between concepts,
 demonstrating they understand the dependency structure — not just the endpoints.
 
-## When to use
+## When this skill fits
 
-Trigger on learning questions about relationships and causality:
+Choose this for learning questions about relationships and causality:
 - "Why does reward shaping matter for sim-to-real?"
 - "How does tokenisation connect to attention?"
 - "What's the relationship between advantage estimation and variance?"
 - "Why do we need a replay buffer before we can do off-policy learning?"
 
-Do NOT trigger on:
-- "What is X?" (definitional — just answer it)
-- "Write me..." / "Fix this..."
-- `/vibes` messages
+This skill is NOT a fit when:
+- "What is X?" (definitional — just answer it, or use feynman)
+- "Write me..." / "Fix this..." (practical — not a learning exercise)
+- Another skill would serve the learning goal better (see description)
 
 ---
 

@@ -1,57 +1,56 @@
-# Tastycode Skills Scaffold
+# Tastycode Skills
 
-Reusable AI skill pack with a simple installer.
+This is a quick collection of some AI skills that I'm writing to try to:
+
+1. Provide safe guardrails that enable understanding of codebases without full offloading to AI (i.e. mitigating the risk of long-term cognitive decline).
+
+2. Enable learning of a given codebase via microlearning style exercises.
+
+3. Keep the process of reading, writing and understanding code engaging whilst still making use of the latest and greatest tools.
+
+## Quick install
+
+Clone, install, and clean up in one shot:
+
+```bash
+git clone https://github.com/dillondesilva/tastycode-skills.git /tmp/tastycode-skills \
+  && bash /tmp/tastycode-skills/scripts/install-skills.sh --global \
+  && rm -rf /tmp/tastycode-skills
+```
+
+Replace `--global` with any target flag below to change where skills land.
+
+## Install targets
+
+| Flag | Installs to |
+|------|-------------|
+| `--project <path>` | `<path>/.cursor/skills/` |
+| `--global` | `~/.cursor/skills/` |
+| `--claude-project <path>` | `<path>/.claude/skills/` |
+| `--claude-global` | `~/.claude/skills/` |
+
+Append skill names to install only specific ones (omit to install all):
+
+```bash
+git clone https://github.com/dillondesilva/tastycode-skills.git /tmp/tastycode-skills \
+  && bash /tmp/tastycode-skills/scripts/install-skills.sh --global concept-chain feynman \
+  && rm -rf /tmp/tastycode-skills
+```
+
+## List available skills
+
+```bash
+git clone https://github.com/dillondesilva/tastycode-skills.git /tmp/tastycode-skills \
+  && bash /tmp/tastycode-skills/scripts/install-skills.sh --list \
+  && rm -rf /tmp/tastycode-skills
+```
 
 ## Structure
 
-- `skills/` - Source skills in `<skill-name>/SKILL.md` format
-- `scripts/install-skills.sh` - Install skills globally or into a project
+- `skills/` — source skills in `<skill-name>/SKILL.md` format
+- `scripts/install-skills.sh` — installer script
 
-## Quick start
+## Notes
 
-Install all skills into current project (from this repo checkout):
-
-```bash
-bash scripts/install-skills.sh --project .
-```
-
-Install all skills into current project (`curl`):
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/dillondesilva/tastycode-skills/main/scripts/install-skills.sh | bash -s -- --project .
-```
-
-Install specific skills globally (from this repo checkout):
-
-```bash
-bash scripts/install-skills.sh --global concept-chain debug-the-explanation
-```
-
-Install specific skills globally (`curl`):
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/dillondesilva/tastycode-skills/main/scripts/install-skills.sh | bash -s -- --global concept-chain debug-the-explanation
-```
-
-List available skills (from this repo checkout):
-
-```bash
-bash scripts/install-skills.sh --list
-```
-
-List available skills (`curl`):
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/dillondesilva/tastycode-skills/main/scripts/install-skills.sh | bash -s -- --list
-```
-
-## Installer behavior
-
-- Uses local `skills/` when running from this repo.
-- Falls back to cloning `tastycode-skills` into a temporary directory when needed.
-- `curl` mode requires `bash` and `git` on your machine.
-- Installs into:
-  - `--project <path>` -> `<path>/.cursor/skills`
-  - `--global` -> `~/.cursor/skills`
-- Optional skill names install only those skills; no names installs all.
 - Set `TC_SKILLS_REPO_URL` to override the clone source repository.
+- Requires `bash` and `git`.

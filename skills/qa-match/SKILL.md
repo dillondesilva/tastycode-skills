@@ -2,14 +2,18 @@
 name: qa-match
 description: >
   Generates a question-and-answer matching exercise using a letter-coded table,
-  where the user matches shuffled answers to their correct questions. Use this
-  skill when the user asks a learning-oriented question that touches on multiple
-  related concepts, terms, or mechanisms at once — triggered by questions like
-  "what are the different types of", "can you explain all the parts of",
-  "what do each of these do", "break down the components of", or any question
-  where a useful answer would naturally cover 4+ distinct concepts. Do NOT use
-  for single-concept questions, practical tasks, or debugging. Only trigger when
-  learning intent is clear and the topic is naturally multi-part.
+  where the user matches shuffled answers to their correct questions. Best for:
+  topics that cover multiple related concepts, terms, or mechanisms at once —
+  where the learning challenge is *discriminating* between similar ideas. Choose
+  this over other skills when the user's question naturally spans 4+ distinct
+  concepts that could be confused with each other ("what are the different types
+  of", "can you explain all the parts of", "what do each of these do", "break
+  down the components of"). The signal is that a good answer would be a list of
+  definitions or descriptions, and the user would benefit from actively matching
+  rather than passively reading. Prefer other skills when: the question is about
+  one concept in depth (→ feynman), about a sequential process (→ concept-chain
+  or fill-the-blanks), or the user wants a critical challenge on a topic they
+  already know (→ debug-the-explanation).
 ---
 
 # Q&A Match
@@ -19,19 +23,19 @@ Questions and answers are presented in separate shuffled columns — the user
 matches them using letter codes, demonstrating recall and discrimination between
 related ideas.
 
-## When to use
+## When this skill fits
 
-Trigger when the answer would naturally cover 4+ distinct concepts:
+Choose this when the answer would naturally cover 4+ distinct concepts:
 - "What are the different RL algorithm families and when do you use each?"
 - "Can you break down the components of a transformer?"
 - "What do each of the LeRobot dataset fields represent?"
 - "Explain the different types of reward shaping"
 
-Do NOT trigger on:
-- Single-concept questions ("what is a Q-function?")
-- "How does X work?" questions (→ use fill-the-blanks instead)
+This skill is NOT a fit when:
+- The question is about a single concept (→ feynman)
+- "How does X work?" questions about process (→ fill-the-blanks)
 - Practical/task requests
-- `/vibes` messages
+- Another skill would serve the learning goal better (see description)
 
 ---
 

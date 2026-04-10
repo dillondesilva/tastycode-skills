@@ -24,11 +24,14 @@ Usage:
   install-skills.sh --list
   install-skills.sh --project <path> [skill-name ...]
   install-skills.sh --global [skill-name ...]
+  install-skills.sh --claude-project <path> [skill-name ...]
+  install-skills.sh --claude-global [skill-name ...]
 
 Examples:
-  install-skills.sh --project .
-  install-skills.sh --project ~/work/my-app code-review
-  install-skills.sh --global code-review release-notes
+  install-skills.sh --project .                          # Cursor project skills
+  install-skills.sh --global code-review                 # Cursor global skills
+  install-skills.sh --claude-project .                   # Claude project skills
+  install-skills.sh --claude-global code-review           # Claude global skills
 EOF
 }
 
@@ -102,6 +105,19 @@ main() {
       mode="global"
       shift
       target="${HOME}/.cursor/skills"
+      ;;
+    --claude-project)
+      mode="claude-project"
+      shift
+      target="${1:-}"
+      [[ -n "${target}" ]] || { usage; exit 1; }
+      shift
+      target="${target}/.claude/skills"
+      ;;
+    --claude-global)
+      mode="claude-global"
+      shift
+      target="${HOME}/.claude/skills"
       ;;
     *)
       usage
